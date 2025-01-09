@@ -24,8 +24,7 @@ const HomePage = () => {
       <SellerSection/>
       <Brands/>
       <Creatorsec/>
-      <MarketingSec/>
-      <Marketingsec2/>
+     
       <Footer />
     </div>
   );

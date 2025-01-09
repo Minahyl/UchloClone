@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AOS from "aos"; // Import AOS
+import "aos/dist/aos.css"; // Import AOS CSS
 
 // Import your images here
 import abz from "../assets/Media/abz.jpg";
@@ -12,11 +14,6 @@ import beliplastic from "../assets/Media/beliplastic.jpg";
 import tig from "../assets/Media/tig.jpg";
 import liniewee from "../assets/Media/liniewee.svg";
 
-
-
-
-
-
 // Define brands with links and images
 const brands = [
   { id: 1, name: "ABZS COLLECTION", image: abz, link: "/abzs-collection" },
@@ -28,15 +25,37 @@ const brands = [
   { id: 7, name: "Azaan Goods", image: azaangoods, link: "/essentia-care" },
   { id: 8, name: "BELI PLASTIC", image: beliplastic, link: "/beli-plastic" },
   { id: 9, name: "THE ICON BY GILANIS", image: tig, link: "/the-icon" },
-  { id: 10, name: "LENIEWEE", image: liniewee , link: "/leniewee" },
-  { id: 11, name: "WAQAS STORE", image: liniewee , link: "/waqas-store" },
-  { id: 12, name: "ABC NOODLES", image: liniewee , link: "/abc-noodles" },
+  { id: 10, name: "LENIEWEE", image: liniewee, link: "/leniewee" },
+  { id: 11, name: "WAQAS STORE", image: liniewee, link: "/waqas-store" },
+  { id: 12, name: "ABC NOODLES", image: liniewee, link: "/abc-noodles" },
 ];
 
 const Brands = () => {
+  const [scrollDirection, setScrollDirection] = useState("down");
+
+  useEffect(() => {
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: false });
+
+    const handleScroll = () => {
+      // Check scroll direction
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 0 && currentScroll > window.scrollY) {
+        setScrollDirection("up");
+      } else {
+        setScrollDirection("down");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="bg-gray-900 text-white py-10">
-      <div className="container mx-auto">
+      <div className="container mx-auto max-w-screen-xl">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
           {brands.map((brand) => (
             <a
@@ -45,6 +64,9 @@ const Brands = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center text-center space-y-2 group"
+              data-aos={scrollDirection === "down" ? "fade-down" : "fade-up"} // Toggle based on scroll direction
+              data-aos-easing="ease"
+              data-aos-duration="500"
             >
               {/* Circle Container */}
               <div className="w-24 h-24 bg-gray-700 rounded-full flex justify-center items-center hover:bg-gray-600 transition duration-300">

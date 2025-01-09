@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Make sure to import the AOS styles
+
 import card2 from "../assets/Media/card2.png";
 import card3 from "../assets/Media/card3.png";
 import card4 from "../assets/Media/card4.png";
@@ -31,13 +34,20 @@ const cards = [
 ];
 
 const CardGrid = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false }); // `once: false` to trigger on both scroll up and down
+  }, []);
+
   return (
     <div className="bg-gray-900 py-8 flex justify-center">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="w-full max-w-screen-3xl px-6 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {cards.map((card, index) => (
           <div
             key={index}
             className="bg-gray-800 rounded-lg overflow-hidden flex flex-col items-center p-4 shadow-lg"
+            data-aos="fade-up" // Add fade-up effect on each card
+            data-aos-once="false" // Allow animation on both scroll up and down
           >
             <img
               src={card.image}

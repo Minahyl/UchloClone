@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
+import "aos/dist/aos.css"; // 
 import shop from "../assets/Media/shop.png";
 import pgraphics from "../assets/Media/pgraphics.png";
 import livestream from "../assets/Media/livestream.png";
@@ -10,7 +10,7 @@ const BusinessSection = () => {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true, // Animation occurs only once
+      once: false, 
     });
   }, []);
 
@@ -55,27 +55,29 @@ const BusinessSection = () => {
             you need to build better business.
           </p>
           <button
-            className="bg-yellow-400 text-black py-3 px-6 rounded-full font-semibold text-lg hover:bg-yellow-300 transition-all duration-300 shadow-lg"
-            data-aos="zoom-in"
-          >
-            START STREAMING
-          </button>
+  className="bg-yellow-400 text-black py-3 px-6 rounded-full font-semibold text-lg hover:bg-yellow-300 transition-all duration-300 shadow-lg"
+  data-aos="zoom-in"
+  onClick={() => (window.location.href = "https://uchlo.com/auth/login")}
+>
+  START STREAMING
+</button>
         </div>
 
         {/* Right Cards Section */}
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-white text-black p-8 rounded-3xl shadow-xl text-center flex flex-col items-center w-full md:w-[350px] lg:w-[400px]"
-              data-aos="flip-left"
-            >
-              <div className="mb-6">{card.icon}</div>
-              <h3 className="text-2xl font-semibold mb-4">{card.title}</h3>
-              <p className="text-gray-600 text-lg">{card.description}</p>
-            </div>
-          ))}
-        </div>
+  {cards.map((card, index) => (
+    <div
+      key={index}
+      className="bg-white text-black py-8 px-6 rounded-2xl shadow-lg text-center flex flex-col items-center"
+      data-aos="flip-left"
+    >
+      <div className="mb-6">{card.icon}</div>
+      <h3 className="text-xl font-bold mb-4">{card.title}</h3>
+      <p className="text-gray-600">{card.description}</p>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );
